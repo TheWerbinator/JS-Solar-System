@@ -5,10 +5,16 @@ import { data } from "../data/data";
 // Return example: 1902
 
 export function getGreatestDiscoveryYear(data) {
-  // Your code goes here...
-}
-
-
+  const hashmap = data.asteroids
+    .map((val) => val.discoveryYear)
+    .reduce((acc, val) => {
+      acc[val] = (acc[val] || 0) + 1;
+      return acc;
+    }, {});
+  return parseInt(
+    Object.keys(hashmap).reduce((a, b) => (hashmap[a] > hashmap[b] ? a : b))
+  );
+} //shamelessly stole this from the internet, please tell me there is an easier way haha
 
 // === TEST YOURSELF ===
 // Once you're finished run the test with "npm run test-16"
